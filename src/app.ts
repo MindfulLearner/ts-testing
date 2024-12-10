@@ -16,6 +16,8 @@ function WithTemplate(template: string, hookId: string) {
       hookEl.innerHTML = template;
       hookEl.querySelector('h1')!.textContent = p.name;
     }
+    console.log('Hook Element:', hookEl);
+    console.log('Person instance:', p);
   };
 }
 
@@ -27,6 +29,7 @@ class Person {
 
   constructor() {
     console.log('Creating person object...');
+    console.log('im there');
   }
 }
 
@@ -34,15 +37,15 @@ const pers = new Person();
 
 console.log(pers);
 
-// ---
+// ----
 
 function Log(target: any, propertyName: string | Symbol) {
-  console.log('Property decorator!');
+  console.log('Property decorator1!');
   console.log(target, propertyName);
 }
 
 function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
-  console.log('Accessor decorator!');
+  console.log('Accessor decorator2!');
   console.log(target);
   console.log(name);
   console.log(descriptor);
@@ -53,14 +56,14 @@ function Log3(
   name: string | Symbol,
   descriptor: PropertyDescriptor
 ) {
-  console.log('Method decorator!');
+  console.log('Method decorator3!');
   console.log(target);
   console.log(name);
   console.log(descriptor);
 }
 
 function Log4(target: any, name: string | Symbol, position: number) {
-  console.log('Parameter decorator!');
+  console.log('Parameter decorator!4');
   console.log(target);
   console.log(name);
   console.log(position);
@@ -83,11 +86,13 @@ class Product {
   constructor(t: string, p: number) {
     this.title = t;
     this._price = p;
+    console.log('Product created:', this.title, 'with price:', this._price);
   }
 
-  @Log3
-  getPriceWithTax(@Log4 tax: number) {
-    return this._price * (1 + tax);
+
+
+  getTitle() {
+    return this.title;
   }
 }
 
